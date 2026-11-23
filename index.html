@@ -70,6 +70,8 @@
 <p class="intro">On 16 November 2026, Imran Khan wrote an open letter to Pakistan's senior judiciary from his cell. This is what it says — and what the UN has already found.</p>
 <ul class="case-list">
 <li><b>UN verdict already given:</b> In Opinion No. 22/2024, the UN Working Group on Arbitrary Detention found Mr Khan's detention arbitrary, without legal basis and apparently politically motivated, and called for his immediate release and compensation. Pakistan has not complied.</li>
+<li><b>Who he is:</b> Prime Minister of Pakistan 2018–2022, founder of the PTI, captain of the 1992 World Cup-winning cricket team, and founder of the Shaukat Khanum Cancer Hospital.</li>
+<li><b>How he got here:</b> Removed by a no-confidence vote in April 2022; arrested on 5 August 2023 and in prison since. In the February 2024 elections, candidates backed by him won the most seats as independents after his party lost its electoral symbol.</li>
 <li><b>Solitary confinement:</b> He states he is kept alone for up to 22 hours a day, since 20 December 2025.</li>
 <li><b>Vision failing:</b> He states he has lost 85% of the vision in his right eye.</li>
 <li><b>Blood pressure 192/193:</b> Recorded on 10 November 2026, according to the letter.</li>
@@ -194,7 +196,11 @@ groupsEl.appendChild(wrap);
 });
 // ---------- Letter templates ----------
 var FULL_SUBJECT = "Urgent Appeal: Life of Former Prime Minister Imran Khan in Grave Danger \u2014 Adiala Jail, Pakistan";
-var SHORT_SUBJECT = "Urgent Appeal \u2014 Imran Khan (Pakistan): Risk to Life in Detention \u2014 New Facts Since WGAD Opinion No. 22/2024";
+// Subject is set automatically for every sender, with their own name and country.
+function subjectFor(name, country) {
+var place = (country === "ALL") ? "All Countries" : country;
+return "Urgent Appeal: Imran Khan's Life in Danger \u2014 " + name + " (" + place + ")";
+}
 function phrases(country) {
 if (country === "ALL") {
 return { citizen: "a concerned citizen, writing on behalf of people all over the world who believe in justice", sign: "A concerned citizen of the world" };
@@ -207,30 +213,38 @@ return { citizen: "a citizen of " + country + ", standing with the people of Pak
 function fullBody(name, country) {
 var p = phrases(country);
 return "Dear Sir or Madam,\n\n" +
-"I am writing to you as " + p.citizen + ", with a heavy heart, to appeal for justice for my leader, former Prime Minister Imran Khan of Pakistan.\n\n" +
-"Mr Khan has been in prison since August 2023, in Adiala Jail, Rawalpindi. In Opinion No. 22/2024, the United Nations Working Group on Arbitrary Detention found that his detention is arbitrary, has no legal basis, and appears politically motivated to keep him out of elections. It called for his immediate release and compensation. The Government of Pakistan has never complied.\n\n" +
-"On 16 November 2026, Mr Khan wrote an open letter to the senior judiciary of Pakistan from jail. In it he says:\n" +
+"I am writing to you as " + p.citizen + ", with a broken heart, to beg for justice for my leader, former Prime Minister Imran Khan of Pakistan.\n\n" +
+"WHO HE IS\n" +
+"Mr Khan is the former Prime Minister of Pakistan (August 2018 \u2013 April 2022) and the founder and chairman of Pakistan Tehreek-e-Insaf (PTI). Before politics, he captained Pakistan's cricket team to its only World Cup victory in 1992, and he founded the Shaukat Khanum Memorial Cancer Hospital, which treats poor patients free of charge.\n\n" +
+"HOW HE GOT HERE\n" +
+"He was removed from office in April 2022 through a vote of no-confidence. On 5 August 2023 he was arrested after a conviction in the Toshakhana case, and he has been in prison ever since \u2014 now in Adiala Jail, Rawalpindi. According to his party, he faces nearly 200 legal cases. In the general elections of February 2024, his party was barred from contesting under its electoral symbol, yet candidates backed by him won the largest number of seats as independents.\n\n" +
+"THE UNITED NATIONS HAS ALREADY RULED\n" +
+"In Opinion No. 22/2024, adopted in March 2024, the United Nations Working Group on Arbitrary Detention found that Mr Khan's detention is arbitrary, has no legal basis, and appears politically motivated to keep him out of elections. It called for his immediate release and compensation. The Government of Pakistan has never complied and never responded to the Working Group.\n\n" +
+"HIS LIFE IS NOW IN DANGER\n" +
+"On 16 November 2026, Mr Khan wrote an open letter to the senior judiciary of Pakistan from his cell. In it he says:\n" +
 "\u2022 He is kept in solitary confinement for up to 22 hours a day, since 20 December 2025.\n" +
 "\u2022 He has lost 85 percent of the vision in his right eye.\n" +
 "\u2022 His blood pressure reached 192/193 on 10 November 2026.\n" +
 "\u2022 The order of the Supreme Court of Pakistan of 18 August 2026 for his medical care and rights has never been implemented.\n" +
-"\u2022 His wife, Bushra Bibi, suffered a detached retina in April 2026.\n\n" +
+"\u2022 His wife, Bushra Bibi, who is also in prison, suffered a detached retina in April 2026.\n\n" +
 "He is being denied proper medical care. His life is in danger. A man who built cancer hospitals for the poor is today begging for medical treatment in his own cell.\n\n" +
-"I respectfully ask you to:\n" +
+"I beg you to:\n" +
 "1. Demand an immediate independent medical examination by doctors chosen by his family.\n" +
 "2. Demand an end to his solitary confinement.\n" +
-"3. Demand implementation of the orders of the Supreme Court of Pakistan.\n" +
-"4. Demand his immediate release, in line with UN Working Group Opinion No. 22/2024.\n" +
-"5. Demand a full and independent investigation into his detention and treatment.\n\n" +
+"3. Demand that his family and his lawyers be given regular, private access to him.\n" +
+"4. Demand implementation of the orders of the Supreme Court of Pakistan.\n" +
+"5. Demand his immediate release, in line with UN Working Group Opinion No. 22/2024.\n" +
+"6. Demand a full and independent investigation into his detention and treatment.\n\n" +
 "Please raise your voice before it is too late. History will remember who spoke and who stayed silent.\n\n" +
 "Respectfully,\n" + name + "\n" + p.sign;
 }
 function shortBody(name, country) {
 var p = phrases(country);
 return "Dear Sir or Madam,\n\n" +
-"I write as " + p.citizen + ", with new facts about the detention of former Prime Minister Imran Khan (Adiala Jail, Rawalpindi, Pakistan), already found arbitrary by the UN Working Group on Arbitrary Detention in Opinion No. 22/2024.\n\n" +
-"In an open letter dated 16 November 2026, Mr Khan states: solitary confinement up to 22 hours a day since 20 December 2025; 85 percent loss of vision in his right eye; blood pressure 192/193 on 10 November 2026; the order of the Supreme Court of Pakistan of 18 August 2026 never implemented; his wife Bushra Bibi suffered a detached retina in April 2026. He is denied proper medical care and his life is at risk.\n\n" +
-"I urgently ask you to: (1) launch an urgent appeal for an independent medical examination by doctors chosen by his family; (2) demand an end to solitary confinement; (3) press for his immediate release under Opinion No. 22/2024.\n\n" +
+"I write as " + p.citizen + ", about former Prime Minister Imran Khan of Pakistan (in office 2018\u20132022, founder of PTI), in prison since his arrest on 5 August 2023 and now held in Adiala Jail, Rawalpindi.\n\n" +
+"The UN Working Group on Arbitrary Detention already found his detention arbitrary, without legal basis and apparently politically motivated, in Opinion No. 22/2024 (March 2024), and called for his immediate release and compensation. Pakistan has never complied.\n\n" +
+"In an open letter dated 16 November 2026, Mr Khan states: solitary confinement up to 22 hours a day since 20 December 2025; 85 percent loss of vision in his right eye; blood pressure 192/193 on 10 November 2026; the order of the Supreme Court of Pakistan of 18 August 2026 never implemented; his wife Bushra Bibi, also imprisoned, suffered a detached retina in April 2026. He is denied proper medical care and his life is at risk.\n\n" +
+"I urgently ask you to: (1) launch an urgent appeal for an independent medical examination by doctors chosen by his family; (2) demand an end to solitary confinement and regular family and lawyer access; (3) press for his immediate release under Opinion No. 22/2024.\n\n" +
 "Respectfully,\n" + name + "\n" + p.sign;
 }
 // ---------- Generate / send / copy ----------
@@ -253,7 +267,7 @@ document.getElementById("tSecs").textContent = String(s).padStart(2, "0");
 }
 tickTimer();
 setInterval(tickTimer, 1000);
-var currentFull = "", currentShort = "";
+var currentFull = "", currentShort = "", currentSubject = "";
 var nameInput = document.getElementById("nameInput");
 var nameHint = document.getElementById("nameHint");
 var resultEl = document.getElementById("result");
@@ -292,10 +306,12 @@ nameHint.textContent = "";
 var country = countrySelect.value;
 currentFull = fullBody(name, country);
 currentShort = shortBody(name, country);
-document.getElementById("subjectText").textContent = FULL_SUBJECT;
+var subj = subjectFor(name, country);
+currentSubject = subj;
+document.getElementById("subjectText").textContent = subj;
 document.getElementById("emailBody").textContent = currentFull;
 var mailto = "mailto:" + ALL_ADDRS.join(",") +
-"?subject=" + encodeURIComponent(SHORT_SUBJECT) +
+"?subject=" + encodeURIComponent(subj) +
 "&body=" + encodeURIComponent(currentShort);
 document.getElementById("sendBtn").setAttribute("href", mailto);
 resultEl.classList.add("show");
@@ -305,7 +321,7 @@ toast("Your email is ready \u2014 tap \u201cSend This Email Now\u201d.");
 });
 document.getElementById("copyFullBtn").addEventListener("click", function () {
 if (!currentFull) return;
-copyText("Subject: " + FULL_SUBJECT + "\n\n" + currentFull, "Full message copied.");
+copyText("Subject: " + currentSubject + "\n\n" + currentFull, "Full message copied.");
 });
 document.getElementById("copyAddrBtn").addEventListener("click", function () {
 copyText(ALL_ADDRS.join(", "), "All 18 addresses copied.");
